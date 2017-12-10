@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace TagsCloudVisualization
 {
-    public class WordsFilter
+    public class WordsFilter : IFilter
     {
         private readonly int minLength;
         private readonly int maxCount;

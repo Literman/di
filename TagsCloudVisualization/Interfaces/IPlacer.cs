@@ -5,6 +5,6 @@ namespace TagsCloudVisualization
 {
     public interface IPlacer
     {
-        IEnumerable<Point> GetCenter();
+        IEnumerable<Point> GetPoint();
     }
 }

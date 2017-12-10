@@ -13,7 +13,7 @@ namespace TagsCloudVisualization
             this.center = center;
         }
 
-        public IEnumerable<Point> GetCenter()
+        public IEnumerable<Point> GetPoint()
         {
             for (var radius = 0; ; radius++)
             for (var i = 0.0; i < 2 * Math.PI; i += Math.PI / 180)

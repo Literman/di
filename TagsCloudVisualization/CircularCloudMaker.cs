@@ -6,14 +6,14 @@ using System.Windows.Forms;
 
 namespace TagsCloudVisualization
 {
-    public class CircularCloudMaker
+    public class CircularCloudMaker : ICloudMaker
     {
-        private readonly CircularCloudLayouter cloudMaker;
+        private readonly ICloudLayouter cloudMaker;
         private readonly string fontName;
         private const int MaxSize = 80;
         private const int MinSize = 20;
 
-        public CircularCloudMaker(CircularCloudLayouter cloudMaker, Options options)
+        public CircularCloudMaker(ICloudLayouter cloudMaker, Options options)
         {
             this.cloudMaker = cloudMaker;
             fontName = options.Font;

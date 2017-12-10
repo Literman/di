@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.IO;
 using System.Linq;
 using Autofac;
@@ -23,21 +21,20 @@ namespace TagsCloudVisualization
             var builder = new ContainerBuilder();
             builder.Register(c => center);
             builder.Register(o => options);
-            
-            builder.RegisterType<CircularCloudLayouter>();
-            builder.RegisterType<CircularCloudMaker>();
-            builder.RegisterType<CircularCloudDrawer>();
+
+            builder.RegisterType<CircularCloudLayouter>().As<ICloudLayouter>();
+            builder.RegisterType<CircularCloudMaker>().As<ICloudMaker>();
+            builder.RegisterType<CircularCloudDrawer>().As<ICloudDrawer>();
 
             builder.RegisterType<Placer>().As<IPlacer>();
-            builder.RegisterType<WordsFilter>();
+            builder.RegisterType<WordsFilter>().As<IFilter>();
             var container = builder.Build();
 
-            var dict = container.Resolve<WordsFilter>().Preprocessing(text);
-            var maker = container.Resolve<CircularCloudMaker>();
-            var drawer = container.Resolve<CircularCloudDrawer>();
+            var dict = container.Resolve<IFilter>().Preprocessing(text);
+            var maker = container.Resolve<ICloudMaker>();
+            var drawer = container.Resolve<ICloudDrawer>();
 
             var rectangles = maker.MakeCloud(dict);
-
             drawer.Draw(rectangles);
         }
     }

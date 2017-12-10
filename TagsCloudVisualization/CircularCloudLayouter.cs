@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace TagsCloudVisualization
 {
-    public class CircularCloudLayouter
+    public class CircularCloudLayouter : ICloudLayouter
     {
         private readonly List<Rectangle> rectangles;
         private readonly IEnumerator<Point> centers;
@@ -13,7 +13,7 @@ namespace TagsCloudVisualization
         public CircularCloudLayouter(IPlacer placer)
         {
             rectangles = new List<Rectangle>();
-            centers = placer.GetCenter().GetEnumerator();
+            centers = placer.GetPoint().GetEnumerator();
         }
 
         public Rectangle PutNextRectangle(Size rectangleSize)
