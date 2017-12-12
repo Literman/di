@@ -39,6 +39,28 @@ namespace TagsCloudVisualization
             }
         }
 
+        internal static void Save(string path, List<Rectangle> rectangles, int width, int height)
+        {
+            using (var bitmap = new Bitmap(width, height))
+            {
+                Draw(rectangles, bitmap);
+                bitmap.Save(path);
+            }
+        }
+
+        private static void Draw(List<Rectangle> rectangles, Image bitmap)
+        {
+            var center = new Point(bitmap.Width / 2, bitmap.Height / 2);
+            var rectPen = new Pen(Color.Blue);
+
+            using (var g = Graphics.FromImage(bitmap))
+            {
+                g.DrawRectangle(new Pen(Color.Red), center.X, center.Y, 1, 1);
+                foreach (var rectangle in rectangles)
+                    g.DrawRectangle(rectPen, rectangle);
+            }
+        }
+
         private static void Draw(Point center, Dictionary<string, Rectangle> rectangles, Image bitmap, string fontName)
         {
             using (var g = Graphics.FromImage(bitmap))

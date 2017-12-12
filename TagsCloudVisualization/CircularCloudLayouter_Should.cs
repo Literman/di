@@ -113,18 +113,17 @@ namespace TagsCloudVisualization
             return Math.Sqrt(point.X * point.X + point.Y * point.Y);
         }
 
-        //[TearDown]
-        //public void TearDown()
-        //{
-        //    var context = TestContext.CurrentContext;
+        [TearDown]
+        public void TearDown()
+        {
+            var context = TestContext.CurrentContext;
 
-        //    if (context.Result.Outcome.Status == TestStatus.Failed)
-        //    {
-        //        var path = $@"{context.TestDirectory}\{context.Test.Name}.bmp";
-
-        //        CircularCloudDrawer.Save(path, Point.Empty, rectangles);
-        //        Console.WriteLine("Tag cloud visualization saved to file " + path);
-        //    }
-        //}
+            if (context.Result.Outcome.Status == TestStatus.Failed)
+            {
+                var path = $@"{context.TestDirectory}\{context.Test.Name}.bmp";
+                CircularCloudDrawer.Save(path, rectangles, 800, 800);
+                Console.WriteLine("Tag cloud visualization saved to file " + path);
+            }
+        }
     }
 }

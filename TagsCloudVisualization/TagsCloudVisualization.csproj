@@ -80,16 +80,19 @@
     <Compile Include="CircularCloudDrawer.cs" />
     <Compile Include="CircularCloudMaker.cs" />
     <Compile Include="IFilter.cs" />
+    <Compile Include="IFiltrator.cs" />
     <Compile Include="Interfaces\ICloudDrawer.cs" />
     <Compile Include="Interfaces\ICloudMaker.cs" />
     <Compile Include="Interfaces\ICloudLayouter.cs" />
     <Compile Include="Interfaces\IPlacer.cs" />
+    <Compile Include="LowerCaseFilter.cs" />
     <Compile Include="MockTests.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Placer.cs" />
-    <Compile Include="WordsFilter.cs" />
+    <Compile Include="TextFiltrator.cs" />
+    <Compile Include="BoringWordsFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
