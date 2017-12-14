@@ -18,7 +18,7 @@ namespace TagsCloudVisualization
             Rectangles = new Dictionary<string, Rectangle>(); 
         }
 
-        public WordsBox CreateRectangles(ICloudLayouter cloudMaker, string fontName)
+        public WordsBox CreateRectangles(ICloudLayouter layouter, string fontName)
         {
             var maxCount = Sizes.Values.Max();
             foreach (var size in Sizes)
@@ -26,7 +26,7 @@ namespace TagsCloudVisualization
                 var tagSize = (int)((double)size.Value / maxCount * (MaxSize - MinSize) + MinSize);
                 var font = new Font(fontName, tagSize, GraphicsUnit.Pixel);
                 var rectangleSize = TextRenderer.MeasureText(size.Key, font);
-                Rectangles[size.Key] = cloudMaker.PutNextRectangle(rectangleSize);
+                Rectangles[size.Key] = layouter.PutNextRectangle(rectangleSize);
             }
             return this;
         }

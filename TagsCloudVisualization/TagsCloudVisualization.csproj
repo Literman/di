@@ -75,24 +75,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CircularCloudLayouter.cs" />
-    <Compile Include="CircularCloudLayouter_Should.cs" />
-    <Compile Include="CircularCloudDrawer.cs" />
-    <Compile Include="CircularCloudMaker.cs" />
-    <Compile Include="IFilter.cs" />
-    <Compile Include="IFiltrator.cs" />
+    <Compile Include="App\CircularCloudLayouter.cs" />
+    <Compile Include="Tests\CircularCloudLayouter_Should.cs" />
+    <Compile Include="App\CircularCloudDrawer.cs" />
+    <Compile Include="App\CircularCloudBuilder.cs" />
+    <Compile Include="App\Common\WordsBoxExtensions.cs" />
+    <Compile Include="Interfaces\IFilter.cs" />
+    <Compile Include="Interfaces\IFiltrator.cs" />
     <Compile Include="Interfaces\ICloudDrawer.cs" />
-    <Compile Include="Interfaces\ICloudMaker.cs" />
+    <Compile Include="Interfaces\ICloudBuilder.cs" />
     <Compile Include="Interfaces\ICloudLayouter.cs" />
     <Compile Include="Interfaces\IPlacer.cs" />
-    <Compile Include="LowerCaseFilter.cs" />
-    <Compile Include="MockTests.cs" />
-    <Compile Include="Options.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Filters\LowerCaseFilter.cs" />
+    <Compile Include="Tests\MockTests.cs" />
+    <Compile Include="App\Options.cs" />
+    <Compile Include="App\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Placer.cs" />
-    <Compile Include="TextFiltrator.cs" />
-    <Compile Include="BoringWordsFilter.cs" />
+    <Compile Include="App\Common\Placer.cs" />
+    <Compile Include="App\Common\TextFiltrator.cs" />
+    <Compile Include="Filters\BoringWordsFilter.cs" />
+    <Compile Include="App\Common\WordsBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

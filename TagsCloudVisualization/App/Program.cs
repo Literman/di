@@ -32,9 +32,9 @@ namespace TagsCloudVisualization
             var text = File.ReadLines(options.InputFile);
             var container = Inject(options);
             var dict = container.Resolve<IFiltrator>().Preprocessing(text);
-            var maker = container.Resolve<ICloudMaker>();
+            var builder = container.Resolve<ICloudBuilder>();
             var drawer = container.Resolve<ICloudDrawer>();
-            var rectangles = maker.MakeCloud(dict);
+            var rectangles = builder.MakeCloud(dict);
             drawer.Draw(rectangles);
         }
     }

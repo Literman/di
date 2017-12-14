@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace TagsCloudVisualization
 {
-    public interface ICloudMaker
+    public interface ICloudBuilder
     {
         WordsBox MakeCloud(WordsBox words);
     }
