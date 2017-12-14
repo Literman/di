@@ -5,6 +5,6 @@ namespace TagsCloudVisualization
 {
     public interface ICloudMaker
     {
-        Dictionary<string, Rectangle> MakeCloud(Dictionary<string, int> tags);
+        WordsBox MakeCloud(WordsBox words);
     }
 }

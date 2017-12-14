@@ -15,11 +15,11 @@ namespace TagsCloudVisualization
             this.options = options;
         }
 
-        public void Draw(Dictionary<string, Rectangle> rectangles)
+        public void Draw(WordsBox wordsBox)
         {
             using (var bitmap = new Bitmap(options.Width, options.Height))
             {
-                Draw(center, rectangles, bitmap, options.Font);
+                Draw(center, wordsBox.Rectangles, bitmap, options.Font);
                 var form = new Form
                 {
                     Width = options.Width,

@@ -15,19 +15,19 @@ namespace TagsCloudVisualization
             maxCount = options.Count;
         }
 
-        public Dictionary<string, int> Preprocessing(IEnumerable<string> input)
+        public WordsBox Preprocessing(IEnumerable<string> input)
         {
             var filtered = filters.Aggregate(input, (current, filter) => filter.Filtrate(current));
             return Sort(filtered);
         }
 
-        private Dictionary<string, int> Sort(IEnumerable<string> wordlist)
+        private WordsBox Sort(IEnumerable<string> wordlist)
         {
             return wordlist
                 .GroupBy(word => word)
                 .OrderByDescending(group => group.Count())
                 .Take(maxCount)
-                .ToDictionary(word => word.Key, words => words.Count());
+                .ToWordsBox();
         }
     }
 }
