@@ -18,15 +18,22 @@ namespace TagsCloudVisualization
             Rectangles = new Dictionary<string, Rectangle>(); 
         }
 
-        public WordsBox CreateRectangles(ICloudLayouter layouter, string fontName)
+        public Result<WordsBox> CreateRectangles(ICloudLayouter layouter, string fontName)
         {
             var maxCount = Sizes.Values.Max();
             foreach (var size in Sizes)
             {
                 var tagSize = (int)((double)size.Value / maxCount * (MaxSize - MinSize) + MinSize);
-                var font = new Font(fontName, tagSize, GraphicsUnit.Pixel);
-                var rectangleSize = TextRenderer.MeasureText(size.Key, font);
-                Rectangles[size.Key] = layouter.PutNextRectangle(rectangleSize);
+                var fontResult = Result.Of(() => new Font(fontName, tagSize, GraphicsUnit.Pixel));
+                if (!fontResult.IsSuccess)
+                    return Result.Fail<WordsBox>($"Font {fontName} doesn't exist");
+
+                var rectangleSize = TextRenderer.MeasureText(size.Key, fontResult.Value);
+                var putResult = layouter.PutNextRectangle(rectangleSize);
+                if (!putResult.IsSuccess)
+                    return Result.Fail<WordsBox>(putResult.Error);
+
+                Rectangles[size.Key] = putResult.Value;
             }
             return this;
         }

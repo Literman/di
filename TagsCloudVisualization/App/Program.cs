@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using Autofac;
@@ -27,15 +28,13 @@ namespace TagsCloudVisualization
             return builder.Build();
         }
 
-        private static void MakeCloud(Options options)
+        private static Result<None> MakeCloud(Options options)
         {
-            var text = File.ReadLines(options.InputFile);
             var container = Inject(options);
-            var dict = container.Resolve<IFiltrator>().Preprocessing(text);
-            var builder = container.Resolve<ICloudBuilder>();
-            var drawer = container.Resolve<ICloudDrawer>();
-            var rectangles = builder.MakeCloud(dict);
-            drawer.Draw(rectangles);
+            return Result.Of(() => File.ReadLines(options.InputFile))
+                .Then(container.Resolve<IFiltrator>().Preprocessing)
+                .Then(container.Resolve<ICloudBuilder>().MakeCloud)
+                .Then(container.Resolve<ICloudDrawer>().Draw);
         }
     }
 }

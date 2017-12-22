@@ -16,10 +16,10 @@ namespace TagsCloudVisualization
             centers = placer.GetPoint().GetEnumerator();
         }
 
-        public Rectangle PutNextRectangle(Size rectangleSize)
+        public Result<Rectangle> PutNextRectangle(Size rectangleSize)
         {
             if (rectangleSize.Width <= 0 || rectangleSize.Height <= 0)
-                throw new ArgumentException("Dimensions must be positive", nameof(rectangleSize));
+                return Result.Fail<Rectangle>("Dimensions must be positive");
 
             var rect = GetRectangle(rectangleSize);
             rectangles.Add(rect);

@@ -5,6 +5,6 @@ namespace TagsCloudVisualization
 {
     public interface ICloudBuilder
     {
-        WordsBox MakeCloud(WordsBox words);
+        Result<WordsBox> MakeCloud(WordsBox words);
     }
 }

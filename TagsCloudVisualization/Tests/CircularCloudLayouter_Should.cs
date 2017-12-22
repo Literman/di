@@ -33,7 +33,7 @@ namespace TagsCloudVisualization
         public void ThrowException_OnNonPositiveSize(int width, int height)
         {
             var size = new Size(width, height);
-            Assert.Throws<ArgumentException>(() => cloud.PutNextRectangle(size));
+            cloud.PutNextRectangle(size).IsSuccess.Should().BeFalse();
         }
 
         [TestCase(10, 10, 0, 0, TestName = "When width equals height")]
@@ -45,7 +45,7 @@ namespace TagsCloudVisualization
             cloud = new CircularCloudLayouter(new Placer(center));
 
             var expectedRectangle = new Rectangle(center.X - width / 2, center.Y - height / 2, width, height);
-            var actualRectangle = cloud.PutNextRectangle(new Size(width, height));
+            var actualRectangle = cloud.PutNextRectangle(new Size(width, height)).Value;
             rectangles.Add(actualRectangle);
 
             actualRectangle.ShouldBeEquivalentTo(expectedRectangle);
@@ -64,7 +64,7 @@ namespace TagsCloudVisualization
             var actualRectangle = Rectangle.Empty;
             foreach (var point in points)
             {
-                actualRectangle = cloud.PutNextRectangle(new Size(point.x, point.y));
+                actualRectangle = cloud.PutNextRectangle(new Size(point.x, point.y)).Value;
                 rectangles.Add(actualRectangle);
             }
             actualRectangle.ShouldBeEquivalentTo(expectedRectangle);
@@ -78,7 +78,7 @@ namespace TagsCloudVisualization
             var size = new Size(width, height);
 
             for (var i = 0; i < count; i++)
-                rectangles.Add(cloud.PutNextRectangle(size));
+                rectangles.Add(cloud.PutNextRectangle(size).Value);
 
             for (var i = 0; i < count; i++)
                 for (var j = i + 1; j < count; j++)
@@ -98,7 +98,7 @@ namespace TagsCloudVisualization
             var cloudRadius = 0.0;
             for (var i = 0; i < count; i++)
             {
-                var rectangle = cloud.PutNextRectangle(size);
+                var rectangle = cloud.PutNextRectangle(size).Value;
                 area += rectangle.Height * rectangle.Width;
                 cloudRadius = Math.Max(cloudRadius, GetDistance(center, rectangle.Location));
             }

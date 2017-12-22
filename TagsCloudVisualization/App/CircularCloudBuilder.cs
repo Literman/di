@@ -11,6 +11,6 @@
             fontName = options.Font;
         }
 
-        public WordsBox MakeCloud(WordsBox words) => words.CreateRectangles(layouter, fontName);
+        public Result<WordsBox> MakeCloud(WordsBox words) => words.CreateRectangles(layouter, fontName);
     }
 }

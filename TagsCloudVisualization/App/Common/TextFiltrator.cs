@@ -15,7 +15,7 @@ namespace TagsCloudVisualization
             maxCount = options.Count;
         }
 
-        public WordsBox Preprocessing(IEnumerable<string> input)
+        public Result<WordsBox> Preprocessing(IEnumerable<string> input)
         {
             var filtered = filters.Aggregate(input, (current, filter) => filter.Filtrate(current));
             return Sort(filtered);

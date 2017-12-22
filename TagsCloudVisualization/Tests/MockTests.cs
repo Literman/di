@@ -24,8 +24,9 @@ namespace TagsCloudVisualization
         [Test]
         public void ReturnRightSize_Exactly3Times()
         {
+            var input = new Dictionary<string, int> { { "aaa", 1 }, { "aaaa", 2 }, { "aaaaa", 3 } };
             var maker = new CircularCloudBuilder(cloud.Object, new Options());
-            var dict = maker.MakeCloud(new WordsBox(new Dictionary<string, int> { { "aaa", 1 }, { "aaaa", 2 }, { "aaaaa", 3 } }));
+            var dict = maker.MakeCloud(new WordsBox(input)).Value;
 
             dict.Rectangles.Select(r => r.Value.Height * r.Value.Width).Should().BeInAscendingOrder();
             cloud.Verify(l => l.PutNextRectangle(It.IsAny<Size>()), Times.Exactly(3));

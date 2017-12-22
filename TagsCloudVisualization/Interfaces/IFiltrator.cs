@@ -4,6 +4,6 @@ namespace TagsCloudVisualization
 {
     public interface IFiltrator
     {
-        WordsBox Preprocessing(IEnumerable<string> input);
+        Result<WordsBox> Preprocessing(IEnumerable<string> input);
     }
 }
