@@ -75,8 +75,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\CircularCloud.cs" />
     <Compile Include="App\CircularCloudLayouter.cs" />
-    <Compile Include="App\Result.cs" />
+    <Compile Include="App\Result\None.cs" />
+    <Compile Include="App\Result\Result.cs" />
+    <Compile Include="Interfaces\ICloud.cs" />
     <Compile Include="Tests\CircularCloudLayouter_Should.cs" />
     <Compile Include="App\CircularCloudDrawer.cs" />
     <Compile Include="App\CircularCloudBuilder.cs" />

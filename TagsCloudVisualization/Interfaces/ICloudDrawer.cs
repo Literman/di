@@ -5,8 +5,8 @@ namespace TagsCloudVisualization
 {
     public interface ICloudDrawer
     {
-        void Draw(WordsBox wordsBox);
+        Result<None> Draw(WordsBox wordsBox);
 
-        void Save(Dictionary<string, Rectangle> rectangles);
+        Result<None> Save(Dictionary<string, Rectangle> rectangles);
     }
 }

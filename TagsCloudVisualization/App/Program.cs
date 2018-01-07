@@ -14,7 +14,8 @@ namespace TagsCloudVisualization
             var parseResult = Parser.Default.ParseArguments<Options>(args);
             if (parseResult.Errors.Any()) return;
             var options = parseResult.Value;
-            MakeCloud(options);
+            var container = Inject(options);
+            MakeCloud(container, options).OnFail(Console.WriteLine);
         }
 
         private static IContainer Inject(Options options)
@@ -28,13 +29,10 @@ namespace TagsCloudVisualization
             return builder.Build();
         }
 
-        private static Result<None> MakeCloud(Options options)
+        private static Result<None> MakeCloud(IContainer container, Options options)
         {
-            var container = Inject(options);
             return Result.Of(() => File.ReadLines(options.InputFile))
-                .Then(container.Resolve<IFiltrator>().Preprocessing)
-                .Then(container.Resolve<ICloudBuilder>().MakeCloud)
-                .Then(container.Resolve<ICloudDrawer>().Draw);
+                .Then(container.Resolve<ICloud>().Build);
         }
     }
 }

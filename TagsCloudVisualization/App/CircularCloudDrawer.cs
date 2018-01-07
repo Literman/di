@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -15,37 +16,49 @@ namespace TagsCloudVisualization
             this.options = options;
         }
 
-        public void Draw(WordsBox wordsBox)
+        public Result<None> Draw(WordsBox wordsBox)
         {
-            using (var bitmap = new Bitmap(options.Width, options.Height))
+            return Result.Of<None>(() =>
             {
-                Draw(center, wordsBox.Rectangles, bitmap, options.Font);
-                var form = new Form
+                using (var bitmap = new Bitmap(options.Width, options.Height))
                 {
-                    Width = options.Width,
-                    Height = options.Height,
-                    BackgroundImage = bitmap
-                };
-                form.ShowDialog();
-            }
+                    Draw(center, wordsBox.Rectangles, bitmap, options.Font);
+                    var form = new Form
+                    {
+                        Width = options.Width,
+                        Height = options.Height,
+                        BackgroundImage = bitmap
+                    };
+                    form.ShowDialog();
+                }
+                return null;
+            }, "Invalid bitmap size");
         }
 
-        public void Save(Dictionary<string, Rectangle> rectangles)
+        public Result<None> Save(Dictionary<string, Rectangle> rectangles)
         {
-            using (var bitmap = new Bitmap(options.Width, options.Height))
+            return Result.Of<None>(() =>
             {
-                Draw(center, rectangles, bitmap, options.Font);
-                bitmap.Save(options.OutputFile);
-            }
+                using (var bitmap = new Bitmap(options.Width, options.Height))
+                {
+                    Draw(center, rectangles, bitmap, options.Font);
+                    bitmap.Save(options.OutputFile);
+                }
+                return null;
+            }, "Invalid bitmap size");
         }
 
-        internal static void Save(string path, List<Rectangle> rectangles, int width, int height)
+        internal static Result<None> Save(string path, List<Rectangle> rectangles, int width, int height)
         {
-            using (var bitmap = new Bitmap(width, height))
+            return Result.Of<None>(() =>
             {
-                Draw(rectangles, bitmap);
-                bitmap.Save(path);
-            }
+                using (var bitmap = new Bitmap(width, height))
+                {
+                    Draw(rectangles, bitmap);
+                    bitmap.Save(path);
+                }
+                return null;
+            }, "Invalid bitmap size");
         }
 
         private static void Draw(List<Rectangle> rectangles, Image bitmap)
